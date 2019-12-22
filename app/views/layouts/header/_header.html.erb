@@ -1,0 +1,47 @@
+<%
+    full_name = @current_user['full_name'].present? ? @current_user['full_name'] : nil
+    photo = ''
+%>
+<header class="top-head hidden-print">
+  <div class="logo-container">
+    <button class="expanded-menu hidden-lg hidden-md" data-toggle="dropdown" aria-hashpopup="true" aria-expanded="false"> 
+      <div class="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      Menu
+    </button>
+  </div>
+  <div class="logo-switch">
+    <a href="" class="logo"><%= image_tag("https://www.sehatq.com/public/assets/img/logo.svg?=1576908788", :alt => "SehatQ") %></a>
+    <div class="switch-project drop-wrapper hidden-xs margin-left-sm-2">
+      <h5 class="color-text">SehatQ</h5>
+    </div>
+  </div>
+  <div class="user-access float-right">
+    <%= render('layouts/header/notification') %>
+    <div class="account-info">
+      <button id="dropAccount" class="account-btn" data-toggle="dropdown" aria-hashpopup="true" aria-expanded="false">
+        <span class="greetings hidden-xs color-text">Selamat <%= gretting_date() %>,</span>
+        <span class="username hidden-xs color-text"><%= full_name %></span>
+        <span class="prm-angle-bottom color-text"></span>
+      </button>
+      <ul class="dropAccount-content" aria-labelledby="drop">
+        <li>
+          <%=
+              link_to(content_tag(:span, nil, class: 'prm-user-1') + ' Edit Profil', profile_path)
+          %>
+        </li>
+        <li>
+          <%= 
+              link_to(content_tag(:span, nil, class: 'prm-logout')+' Log Out', logout_path, {
+                method: :get,
+                'data-confirm': 'Anda yakin ingin keluar dari sistem ini?'
+              }) 
+          %>
+        </li>
+      </div>
+    </div>
+  </div>
+</header>

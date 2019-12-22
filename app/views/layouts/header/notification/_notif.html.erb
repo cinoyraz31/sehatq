@@ -1,0 +1,48 @@
+<%
+  data = @notification.present? ? @notification[:data] : []
+  count = @notification.present? ? @notification[:count] : 0
+%>
+<div id="wrapper-notification">
+  <div class="switch-project drop-wrapper">
+    <a href="javascript:void(0)" class="wrap-icon" id="drop" data-toggle="dropdown" aria-hashpopup="true" aria-expanded="false" title="<%= "Anda memiliki #{count} notifikasi" %>">
+      <span class="prm-bell"></span>
+      <% if count > 0 %>
+        <span class="counter"><%= count %></span>
+      <% end %>
+    </a>
+
+    <div class="drop-content" data-toggle="dropdown">
+      <span class="first">Anda memiliki <strong><%= count %></strong> notifikasi</span>
+      <% if data.present? %>
+        <% key = 0 %>
+        <% data.each do |notif| %>
+            <% if notif.import.present? %>
+              <%= 
+                  render('layouts/header/notification/notif_item', {
+                    value: notif,
+                    key: key
+                  }) 
+              %>
+              <% if notif.import.status == 'process' %>
+                <%= 
+                    link_to('Call Interval', call_notification_panel_dashboard_path(notif.import.id, key), {
+                      class: 'call-interval ajax-link',
+                      style: 'display:none;',
+                      'data-wrapper-write': ".wrapper-header-download-#{key}",
+                      'data-interval': '10000',
+                      'data-loadingbar': 'false',
+                    }) 
+                %>
+              <% end %>
+            <% end %>
+            <% key += 1 %>
+        <% end %>
+      <% end %>      
+      <%=
+          link_to(content_tag(:span, 'Lihat Semua', class: 'disblock'), notification_dashboard_path, {
+            class: 'margin-top-2 close-project'
+          })
+      %>
+    </div>
+  </div>
+</div>

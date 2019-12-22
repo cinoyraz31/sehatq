@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% title_for_layout = @title_for_layout.present? ? "#{@title_for_layout} | " : nil %>
+    <title><%= title_for_layout %>SehatQ</title>
+    <link rel="shortcut icon" type="image/x-icon" href="#">
+    <%= stylesheet_link_tag 'application', media: 'all'%>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body class="vbox">
+    <%= render 'layouts/header/header' %>
+    <%= render 'layouts/header/sidebar' %>
+    <div class="content">
+      <%= render "layouts/header/breadcrumb" %>
+      <%= render 'layouts/alert/notice' %>
+      <%= yield %>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <%= javascript_include_tag 'affix' %>
+    <%= javascript_include_tag 'dropdown' %>
+    <%= javascript_include_tag 'tab' %>
+    <%= javascript_include_tag 'tooltip' %>
+    <%= javascript_include_tag 'simplebar' %>
+
+    <%= javascript_include_tag 'library' %>
+    <%= javascript_include_tag 'jquery-ui.min' %>
+    <%= javascript_include_tag 'customs' %>
+    <%= javascript_include_tag 'animation' %>
+    <%= javascript_include_tag 'functions' %>
+  </body>
+</html>

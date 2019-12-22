@@ -1,0 +1,103 @@
+<div class="login-wrapper register">
+	<div class="company-logo">
+		<h1><a href="">Company Name - Their tagline / marketing copy place here</a></h1>
+	</div>
+	<div class="greetings">
+		<p>Silakan anda mendaftar dengan akun email anda.</p>
+	</div>
+	<div class="row">
+		<%= form_tag(@url_form, method: "post", 'data-remote': 'true', 'multipart': true, :authenticity_token => true, class: 'login-form') do %>
+			<div class="form-group">
+				<%= 
+					render('partial/json_field_item', {
+						'field_name': :email,
+						'model_name': 'user',
+						'type': 'text',
+						'object': @user,
+						'errors': @user['errors'],
+					}) 	
+				%>
+				<label for="username">Email</label>
+			</div>
+			<div class="form-group">
+				<%= 
+					render('partial/json_field_item', {
+						'field_name': :full_name,
+						'model_name': 'user',
+						'type': 'text',
+						'object': @user,
+						'errors': @user['errors'],
+					}) 	
+				%>
+				<label for="username">Nama Lengkap</label>
+			</div>
+			<div class="form-group">
+				<%= 
+					render('partial/json_field_item', {
+						'field_name': :password,
+						'model_name': 'user',
+						'type': 'password',
+						'object': @user,
+						'errors': @user['errors'],
+					}) 	
+				%>
+				<label for="username">Password</label>
+			</div>
+			<div class="form-group">
+				<div class="select-group-wrapper">
+				<%= 
+					render('partial/json_field_item', {
+						'field_name': :gender,
+						'model_name': 'user',
+						'is_select': {
+							empty: 'Pilih Jenis Kelamin',
+							options: [
+								['Laki - laki', 'male'],
+								['Perempuan', 'female'],
+							],
+						},
+						'object': @user,
+						'errors': @user['errors'],
+					}) 	
+				%>
+				</div>
+			</div>
+			<div class="form-group">
+				<%= 
+					render('partial/json_field_item', {
+						'field_name': :date_birth,
+						'model_name': 'user',
+						'type': 'text',
+						'object': @user,
+						'errors': @user['errors'],
+						'attributes': {
+							class: 'disblock fullwidth datepicker'
+						}
+					}) 	
+				%>
+				<label for="username">Tanggal Lahir</label>
+			</div>
+			<div class="form-group">
+				<%= 
+					render('partial/json_field_item', {
+						'field_name': :place_birth,
+						'model_name': 'user',
+						'type': 'text',
+						'object': @user,
+						'errors': @user['errors'],
+					}) 	
+				%>
+				<label for="username">Tempat Lahir</label>
+			</div>
+			<button class="btn blue " type="submit">Daftar</button>
+			<div class="margin-vert-2 align-center">
+				<span class="cgray2"> Atau </span>
+			</div>
+			<div class="align-center">
+				<%= 
+					link_to('Login', login_path) 
+				%>
+			</div>
+		<% end %>
+	</div>
+</div>

@@ -1,0 +1,82 @@
+<%
+	text_name = params[:text_name].present? ? params[:text_name] : nil
+%>
+<div class="section">
+	<div class="content-block padding-0">
+		<div class="margin-3">
+			<%= 
+				render('partial/filter', {
+                    add: {
+						url: new_rooms_path,
+					},
+					filter: {
+						filter_1: {
+							value: text_name,
+							placeholder: 'Masukkan nama ruangan',
+							type: 'text',
+							icon: 'search',
+							name: 'text_name',
+						},
+					}
+				}) 
+			%>
+		</div>
+		<div id="admin" class="tab-pane active padding-left-3 padding-right-3 padding-bottom-3" role="tabpanel" aria-labelledby="admin-tab">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr class="main-head">
+							<th>
+								<span>Rumah Sakit</span>
+							</th>
+							<th>
+								<span>Ruangan</span>
+							</th>
+                            <th>
+								<span>Date</span>
+							</th>
+							<th class="align-center">
+								<span>Action</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @rooms.present? %>
+							<% @rooms.each do |room| %>
+								<%
+									action_arr = [										
+										{
+											'text': 'Edit',
+											'icon': 'prm-pen',
+											'url': edit_rooms_path(room.id),
+										},
+										{
+											'text': 'Hapus',
+											'icon': 'prm-trash',
+											'url': delete_rooms_path(room.id),
+											'attribute_link': {
+												'data-confirm': 'Anda yakin ingin menghapus ruangan ini?',
+											}
+										},
+									]
+								%>
+								<tr>
+									<td><%= room.hospital.name %></td>
+									<td><%= room.name %></td>
+									<td><%= room.created_at.strftime('%d %b %Y %H:%M') %></td>
+									<td><%= application__call_dropdown_action(action_arr) %></td>
+								</tr>
+							<% end %>
+						<% end %>
+					</tbody>
+				</table>
+				<div class="filter-footer">
+					<% unless @rooms.present? %>
+						<%= content_tag(:span, 'Data belum tersedia', class: 'alert alert-warning tacenter') %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+		<%= render 'partial/pagination', values: @rooms %>
+</div>

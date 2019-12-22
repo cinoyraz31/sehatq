@@ -1,0 +1,242 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+body.login {
+  height: 100%;
+  overflow: hidden;
+  background-color: #d9d9d9;
+  font: 14px 'droid_sansregular', Helvetica, Arial, sans-serif;
+}
+body.login:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 150%;
+  height: 65%;
+  top: 60%;
+  right: -20%;
+  bottom: 0;
+  left: -20%;
+  margin: auto;
+  background-color: #cccccc;
+  -moz-transform: rotate(-4deg);
+  -ms-transform: rotate(-4deg);
+  -webkit-transform: rotate(-4deg);
+  transform: rotate(-4deg);
+}
+
+.login-wrapper {
+  position: absolute;
+  top: 25%;
+  right: 0;
+  bottom: 25%;
+  left: 0;
+  margin: auto;
+  width: 320px;
+  min-height: 550px;
+  background-color: whitesmoke;
+  z-index: 4;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.2);
+}
+.login-wrapper.register{
+  min-height: 650px;
+}
+.login-wrapper .login-form {
+  padding: 0 30px;
+}
+.login-wrapper .login-form input {
+  height: 55px;
+  background-color: transparent;
+  padding: 25px 15px 10px;
+  position: relative;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-transition: linear 0.1s;
+  -o-transition: linear 0.1s;
+  -webkit-transition: linear 0.1s;
+  transition: linear 0.1s;
+  width: 100%;
+}
+.login-wrapper .login-form input:focus {
+  background-color: #f0fef7;
+}
+.login-wrapper .login-form label {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: .9em;
+  font-family: 'montserrat', sans-serif;
+  letter-spacing: 1px;
+  color: #AAA;
+  cursor: text;
+  -moz-transition: linear 0.08s;
+  -o-transition: linear 0.08s;
+  -webkit-transition: linear 0.08s;
+  transition: linear 0.08s;
+}
+.login-wrapper .login-form input:focus + label {
+  top: 5px;
+  color: #069D54;
+  font-size: 0.75em;
+  text-transform: uppercase;
+}
+.login-wrapper .login-form .form-group {
+  margin-bottom: 10px;
+  position: relative;
+}
+.login-wrapper .login-form .form-group.valid input {
+  border-color: #069D54;
+}
+.login-wrapper .login-form .form-group.invalid input:focus {
+  border-color: #C30F0F !important;
+  background: #feeded;
+}
+.login-wrapper .login-form .form-group.invalid input:focus + label {
+  color: #C30F0F;
+}
+.login-wrapper .login-form a.forgot {
+  display: block;
+  font-size: .75em;
+  font-family: 'montserrat', sans-serif;
+  margin-bottom: 15px;
+}
+.login-wrapper .login-form button.btn {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #67c1c4;
+  color: #fff;
+}
+.login-wrapper .greetings {
+  text-align: center;
+  margin: 15px 0 30px;
+  padding: 0 15px;
+  color: #404040;
+}
+.login-wrapper .greetings h4 {
+  font-size: 1.2em;
+  font-weight: 700;
+  font-family: 'montserrat', sans-serif;
+  text-transform: uppercase;
+}
+.login-wrapper .greetings p {
+  margin: 0;
+  font-size: .9em;
+}
+.login-wrapper .company-logo {
+  margin: 0 0 15px;
+  background-color: #FFF;
+  border-bottom: 5px solid #ededed;
+  -moz-border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px;
+  border-radius: 3px 3px 0 0;
+}
+.login-wrapper .company-logo h1 > a {
+  display: block;
+  margin: auto;
+  width: 240px;
+  height: 96px;
+  background: url(https://www.sehatq.com/public/assets/img/logo.svg?=1576836705) no-repeat;
+  background-size: 210px;
+  background-position-y: center;
+  text-indent: -9999em;
+}
+.login-wrapper .powered {
+  width: 100%;
+  margin-top: 25px;
+}
+.login-wrapper .powered h1 {
+  text-align: center;
+}
+.login-wrapper .powered h1 > span {
+  display: inline-block;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 0.75em;
+}
+.login-wrapper .powered h1 > a {
+  position: relative;
+  top: 4px;
+  display: inline-block;
+  margin: auto;
+  width: 85px;
+  height: 10px;
+  text-indent: -9999em;
+}
+
+body.login .google {
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #fafafa;
+  border-radius: 5px;
+  color: #e33826;
+  border: 1px solid #fd7768;
+  width: 100%;
+}
+body.login .google img {
+    width: 25px;
+}
+.border-full {
+    border: 1px solid #f0f0f0;
+}
+.disinblock {
+    display: inline-block;
+}

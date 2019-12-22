@@ -1,0 +1,22 @@
+<%
+    active_menu = @active_menu.present? ? @active_menu : 'dashboard'
+    active_sub_menu = @active_sub_menu.present? ? @active_sub_menu : nil
+    open_sub_menu = active_sub_menu.nil? ? '' : 'its-expand open'
+
+    data_arr = app_menu_generator(@menu, active_menu, active_sub_menu)
+    menu = data_arr[:menu]
+    sub_menu = data_arr[:sub_menu]
+%>
+<div class="sidebar hidden-print <%= open_sub_menu %>" data-simplebar-direction="vertical">
+  <div class="main-bar">
+    <ul>
+      <%= menu %>
+    </ul>
+  </div>
+
+  <% if sub_menu != '' %>
+    <div class="expanded-bar">
+      <%= sub_menu %>
+    </div>
+  <% end %>
+</div>

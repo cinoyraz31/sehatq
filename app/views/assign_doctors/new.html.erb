@@ -1,0 +1,79 @@
+<div class="section-form">
+	<%= form_tag(@url_form, method: "post", 'data-remote': 'true', 'multipart': true, :authenticity_token => true) do %>
+	<div class="content-section">
+		<div class="content-with-annotation">
+			<div class="col-lg-3 padding-side-xs-0">
+				<div class="padding-vert-lg-4 padding-bottom-sm-4 padding-bottom-xs-4">
+					<h6>Informasi Dasar</h6>
+					<p class="margin-top-md-1 margin-bottom-sm-0 margin-bottom-xs-0 cgray2">Lengkapi form dokter untuk bekerja di rumah sakit dan poli dirumah sakit tersebut </p>
+				</div>
+			</div>
+            <div class="col-lg-9 padding-side-xs-0">
+				<div class="content-block">
+                    <div class="content-input">
+						<label for="" class="content-label">Nama Rumah Sakit</label>
+                        <div class="select-group-wrapper">
+						<%= 
+							render('partial/json_field_item', {
+								'field_name': :hospital_id,
+								'model_name': 'hospital_user',
+								'is_select': {
+                                    empty: 'Pilih rumah sakit',
+                                    options: @hospitals,
+                                },
+								'object': @hospital_user,
+								'errors': @hospital_user['errors'],
+                                'attributes': {
+                                    class: 'disblock fullwidth ajax-change',
+                                    'data-url': get_polies_assign_doctors_path,
+                                    'data-use-current-value' => 'hospital_id',
+                                    'data-wrapper-write-page' => '#polyID'
+                                }
+							}) 	
+						%>
+                        </div>
+					</div>
+                    <div class="content-input">
+						<label for="" class="content-label">Poli</label>
+                        <div class="select-group-wrapper">
+						<%= 
+							render('partial/json_field_item', {
+								'field_name': :poly_id,
+								'model_name': 'hospital_user',
+								'is_select': {
+                                    empty: 'Pilih Poli',
+                                    options: @polies.pluck(:title, :id),
+                                },
+								'object': @hospital_user,
+								'errors': @hospital_user['errors'],
+                                'attributes': {
+                                    id: 'polyID',
+                                }
+							}) 	
+						%>
+                        </div>
+					</div>
+                    <div class="content-input">
+						<label for="" class="content-label">Dokter</label>
+                        <div class="select-group-wrapper">
+						<%= 
+							render('partial/json_field_item', {
+								'field_name': :user_id,
+								'model_name': 'hospital_user',
+								'is_select': {
+                                    empty: 'Pilih Dokter',
+                                    options: @doctors,
+                                },
+								'object': @hospital_user,
+								'errors': @hospital_user['errors'],
+							}) 	
+						%>
+                        </div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= render("partial/submit", { url_back: assign_doctors_path }) %>
+    <% end %>
+</div>

@@ -1,0 +1,8 @@
+class AddRoom < ActiveRecord::Migration[5.1]
+  def change
+  	create_table :rooms, id: :integer do |t|
+  		t.string :name
+  		t.timestamps null: false
+  	end
+  end
+end

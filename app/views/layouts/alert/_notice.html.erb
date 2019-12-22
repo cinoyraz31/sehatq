@@ -1,0 +1,50 @@
+<%
+	notice = notice.present? ? notice : false
+	notice = flash[:notice].present? ? flash[:notice] : notice
+
+	alert = alert.present? ? alert : false
+	alert = flash[:alert].present? ? flash[:alert] : alert
+%>
+
+<div class="wrapper-alert">
+	<% if notice.present? %>
+		<div class="alert-wrapper open">
+			<%=
+				content_tag(:div, class: 'alert alert-success') do
+					concat(content_tag(:p, id: 'msg-text') do
+						concat(content_tag(:strong, 'Selamat!'))
+						concat(' '+notice.to_s)
+						concat(link_to('Close', 'javascript:void(0);', {
+							class: 'close-btn',
+							onclick: '$(".alert-wrapper.open").hide();',
+						}))
+					end)
+					concat(content_tag(:div, 'success', {
+						id: 'msg-status',
+						class: 'hide',
+					}))
+				end
+			%>
+		</div>
+	<% end %>
+	<% if alert.present? %>
+		<div class="alert-wrapper open">
+			<%=
+				content_tag(:div, class: 'alert alert-fail') do
+					concat(content_tag(:p, id: 'msg-text') do
+						concat(content_tag(:strong, 'Duh!'))
+						concat(' '+alert.to_s)
+						concat(link_to('Close', 'javascript:void(0);', {
+							class: 'close-btn',
+							onclick: '$(".alert-wrapper.open").hide();',
+						}))
+					end)
+					concat(content_tag(:div, 'error', {
+						id: 'msg-status',
+						class: 'hide',
+					}))
+				end
+			%>
+		</div>
+	<% end %>
+</div>

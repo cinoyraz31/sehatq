@@ -1,0 +1,39 @@
+<div class="section-form">
+	<%= form_tag(@url_form, method: "post", 'data-remote': 'true', 'multipart': true, :authenticity_token => true) do %>
+	<div class="content-section">
+		<div class="content-with-annotation">
+			<div class="col-lg-3 padding-side-xs-0">
+				<div class="padding-vert-lg-4 padding-bottom-sm-4 padding-bottom-xs-4">
+					<h6>Daftar Sekarang</h6>
+					<p class="margin-top-md-1 margin-bottom-sm-0 margin-bottom-xs-0 cgray2">Lengkapi form poli untuk rumah sakit, periksa kembali data yang dibutuhkan</p>
+				</div>
+			</div>
+            <div class="col-lg-9 padding-side-xs-0">
+				<div class="content-block">
+                    <div class="content-input">
+						<label for="" class="content-label">Rumah Sakit</label>
+                        <span class="bold"><%= @examination_schedule.hospital.name %></span>
+                    </div>
+                    <div class="content-input">
+						<label for="" class="content-label">Poli</label>
+                        <span class="bold"><%= @examination_schedule.hospital_user.poly.title %></span>
+                    </div>
+                    <div class="content-input">
+						<label for="" class="content-label">Dokter</label>
+                        <span class="bold"><%= @examination_schedule.hospital_user.user.full_name %></span>
+                    </div>
+                    <div class="content-input">
+						<label for="" class="content-label">Hari & Jam Konsultasi</label>
+                        <span class="bold"><%= "#{getDayName(@examination_schedule.dayname)}, #{@examination_schedule.time_start.strftime('%H:%M')} - #{@examination_schedule.time_end.strftime('%H:%M')}" %></span>
+                    </div>
+                    <div class="content-input">
+						<label for="" class="content-label">Nomor Urut</label>
+                        <span class="bold"><%= @exam_count + 1 %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%= render("partial/submit", { url_back: registrations_path, text_submit: 'Saya Yakin' }) %>
+    <% end %>
+</div>

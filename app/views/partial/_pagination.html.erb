@@ -1,0 +1,30 @@
+<%
+	# values = values.present? ? values : false;
+	url = request.original_fullpath
+	total_entries = values.total_entries
+	number_start = values.offset + 1
+	per_page = values.per_page
+	current_page = values.current_page.to_i
+	number_of = current_page * per_page.to_i
+	number_of = number_of >= total_entries ? total_entries : number_of
+%>
+<span class="will_paginate">
+	<%= will_paginate values, class: 'paginate margin-top-4 margin-bottom-6 disinblock' %>
+		<% if total_entries > 0 %>
+			<div class="float-right padding-top-4 padding-right-1">
+				<span>
+					<strong><%= number_start %></strong> 
+					<span class="cgray2">-</span> 
+					<strong><%= number_of %></strong> 
+					<span class="cgray2">of</span> 
+					<strong><%= total_entries %></strong> 
+					<span class="cgray2">results</span>
+				</span>
+			</div>
+		<% end %>
+	<%= 
+		hidden_field_tag(:hidden, url, {
+			id: 'hid-pushstate-url',
+		}) 
+	%>
+</span>

@@ -1,0 +1,79 @@
+<%
+	text_name = params[:text_name].present? ? params[:text_name] : nil
+%>
+<div class="section">
+	<div class="content-block padding-0">
+		<div class="margin-3">
+			<%= 
+				render('partial/filter', {
+					filter: {
+						filter_1: {
+							value: text_name,
+							placeholder: 'Masukkan pelanggan atau dokter',
+							type: 'text',
+							icon: 'search',
+							name: 'text_name',
+						},
+					}
+				}) 
+			%>
+		</div>
+		<div id="admin" class="tab-pane active padding-left-3 padding-right-3 padding-bottom-3" role="tabpanel" aria-labelledby="admin-tab">
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr class="main-head">
+							<th>
+								<span>Nama</span>
+							</th>
+							<th>
+								<span>Email</span>
+							</th>
+							<th>
+								<span>Jenis Kelamin</span>
+							</th>
+                            <th>
+								<span>Tempat & Tanggal Lahir</span>
+							</th>
+                            <th>
+								<span>Tanggal Terdaftar</span>
+							</th>
+							<th class="align-center">
+								<span>Action</span>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @clients.present? %>
+							<% @clients.each do |client| %>
+								<%
+									action_arr = [										
+										{
+											'text': 'Detil',
+											'icon': 'prm-view',
+											'url': '#',
+										},
+									]
+								%>
+								<tr>
+									<td><%= client.full_name %></td>
+									<td><%= client.email %></td>
+									<td><%= get_gender(client.gender, '-') %></td>
+									<td><%= "#{client.place_birth}, #{client.date_birth}" %></td>
+									<td><%= client.registered_at.strftime('%d %b %Y %H:%M') %></td>
+									<td><%= application__call_dropdown_action(action_arr) %></td>
+								</tr>
+							<% end %>
+						<% end %>
+					</tbody>
+				</table>
+				<div class="filter-footer">
+					<% unless @clients.present? %>
+						<%= content_tag(:span, 'Data belum tersedia', class: 'alert alert-warning tacenter') %>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+		<%= render 'partial/pagination', values: @clients %>
+</div>
