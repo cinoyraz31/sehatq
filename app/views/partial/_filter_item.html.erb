@@ -1,0 +1,46 @@
+<% attributes = filter[:attributes].present? ? filter[:attributes] : {} %>
+<% parameter = app_get_param_filter(attributes) %>
+<% value = filter[:value].present? ? filter[:value] : nil %>
+<% icon = filter[:icon].present? ? filter[:icon] : nil %>
+<% placeholder = filter[:placeholder].present? ? filter[:placeholder] : 'Pilih' %>
+<% options = filter[:options].present? ? filter[:options] : [] %>
+<% type = filter[:type].present? ? filter[:type] : 'select' %>
+<% name = filter[:name].present? ? filter[:name] : nil %>
+<% classs = filter[:class].present? ? filter[:class] : nil %>
+<%
+	parameter = parameter.merge({
+		placeholder: placeholder,
+		type: 'text', 
+		class: "disblock fullwidth #{classs}"
+	})
+
+	case name
+	when 'date_range' || 'month_range'
+		parameter = parameter.merge({
+			'data-trigger': 'keyup',
+		})
+	when 'date_single'
+		parameter = parameter.merge({
+			'data-trigger': 'keyup',
+		})
+	end
+%>
+
+<div class="content-input">
+	<div class="select-group-wrapper <%= icon %>">
+	<% case type %>
+	<% when 'select' %>
+			<%= 
+				select_tag(name, options_for_select(options, value), parameter.merge({
+						class: 'disblock fullwidth',
+						:prompt => placeholder,
+					})
+				)
+			%>			
+	<% when 'text' %>
+		<%=
+			text_field_tag(name, value, parameter)
+		%>
+	<% end %>
+	</div>
+</div>

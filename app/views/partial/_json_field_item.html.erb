@@ -1,0 +1,85 @@
+<%
+	object = object.present? ? object : false
+	errors = errors.present? ? errors : false
+	field_name = field_name.present? ? field_name : false
+	model_name = model_name.present? ? model_name : false
+	type = type.present? ? type : object
+	value = value.present? ? value : nil
+
+	value = defined?(object[field_name.as_json]) ? object[field_name.as_json].to_s : value
+	attributes = defined?(attributes) == nil ? {} : attributes
+
+	field = defined?(alias_name) == nil ? "#{model_name}[#{field_name}]" : alias_name
+	
+	default_attributes = {
+		'class': 'disblock fullwidth',
+		name: field,
+	}
+
+	if attributes.present?
+		default_attributes = default_attributes.merge(attributes)
+	end
+%>
+
+<% if defined?(is_select) %>
+	<% options = is_select[:options].present? ? is_select[:options] : [] %>
+	<% empty = is_select[:empty].present? ? is_select[:empty] : 'Pilih' %>
+	<% disabled = is_select[:disabled].present? ? is_select[:disabled] : false %>
+
+	<% if empty != 'nil' %>
+		<% default_attributes[:include_blank] = empty %>
+	<% end %>
+
+	<%=
+		select_tag(field_name, options_for_select(options, selected: value, disabled: disabled), default_attributes)
+	%>
+<% elsif type == 'text' %>
+	<%= 
+		text_field_tag(field_name, value, default_attributes) 
+	%>
+<% elsif type == 'password' %>
+	<% default_attributes['type'] = 'password' %>
+	<%= 
+		text_field_tag(field_name, value, default_attributes) 
+	%>
+<% elsif type == 'file' %>
+	<% url_img = object.present? ? object["hidden_#{field_name.as_json}"] : nil %>
+
+	<% if url_img.present? %>
+		<% hidden_name = "#{model_name}[hidden_#{field_name}]" %>
+		<%= hidden_field_tag(hidden_name, url_img) %>
+		<%
+			ext = File.extname(url_img)
+
+			case ext
+			when '.pdf'
+				url_img = 'cover_pdf.png'
+			when '.doc'
+				url_img = 'cover_doc.png'
+			when '.xlsx' || '.csv'
+				url_img = 'cover_excel.png'
+			end
+		%>
+		<%= image_tag(url_img, class: 'thumbnail') %>
+	<% end %>
+
+	<%= file_field_tag(field_name, default_attributes) %>
+<% elsif type == 'textarea' %>
+	<%= 
+		text_area_tag(field_name, value, default_attributes)
+	%>
+<% elsif type == 'toggle' %>
+	<% 
+		if value.present?
+	 		default_attributes[:checked] = 'checked'
+	 	end 
+	%>
+	<div class="toggle-button">
+		<%=
+			check_box_tag(field_name, true, false, default_attributes)
+		%>
+		<label for="<%= field_name %>"></label>
+	</div>
+<% end %>
+
+<%= error_message_on_json(errors, field_name) %>
